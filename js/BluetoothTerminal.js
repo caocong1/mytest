@@ -171,8 +171,8 @@ class BluetoothTerminal {
 
         // Write chunk to the characteristic and resolve the promise.
         this._writeToCharacteristic(this._characteristic, chunks[i])
-            .then(resolve)
-            .catch(reject)
+          .then(resolve)
+          .catch(reject)
       }))
     }
 
@@ -199,12 +199,12 @@ class BluetoothTerminal {
    */
   _connectToDevice (device) {
     return (device ? Promise.resolve(device) : this._requestBluetoothDevice())
-        .then((device) => this._connectDeviceAndCacheCharacteristic(device))
-        .then((characteristic) => this._startNotifications(characteristic))
-        .catch((error) => {
+      .then((device) => this._connectDeviceAndCacheCharacteristic(device))
+      .then((characteristic) => this._startNotifications(characteristic))
+      .catch((error) => {
         this._log(error)
-          return Promise.reject(error)
-        })
+        return Promise.reject(error)
+      })
   }
 
   /**
@@ -225,7 +225,7 @@ class BluetoothTerminal {
     if (!device.gatt.connected) {
       this._log('"' + device.name +
           '" bluetooth device is already disconnected')
-      return;
+      return
     }
 
     device.gatt.disconnect()
@@ -242,17 +242,17 @@ class BluetoothTerminal {
     this._log('Requesting bluetooth device...')
 
     return navigator.bluetooth.requestDevice({
-      acceptAllDevices: true
+      filters: [{ name: 'irxon' }]
     })
-        .then((device) => {
+      .then((device) => {
         this._log('"' + device.name + '" bluetooth device selected')
 
-          this._device = device // Remember device.
-          this._device.addEventListener('gattserverdisconnected',
+        this._device = device // Remember device.
+        this._device.addEventListener('gattserverdisconnected',
           this._boundHandleDisconnection)
 
-          return this._device
-        })
+        return this._device
+      })
   }
 
   /**
@@ -270,23 +270,23 @@ class BluetoothTerminal {
     this._log('Connecting to GATT server...')
 
     return device.gatt.connect()
-        .then((server) => {
+      .then((server) => {
         this._log('GATT server connected', 'Getting service...')
 
-          return server.getPrimaryService(this._serviceUuid)
-        })
-        .then((service) => {
+        return server.getPrimaryService(this._serviceUuid)
+      })
+      .then((service) => {
         this._log('Service found', 'Getting characteristic...')
 
-          return service.getCharacteristic(this._characteristicUuid)
-        })
-        .then((characteristic) => {
+        return service.getCharacteristic(this._characteristicUuid)
+      })
+      .then((characteristic) => {
         this._log('Characteristic found')
 
-          this._characteristic = characteristic // Remember characteristic.
+        this._characteristic = characteristic // Remember characteristic.
 
-          return this._characteristic
-        })
+        return this._characteristic
+      })
   }
 
   /**
@@ -299,12 +299,12 @@ class BluetoothTerminal {
     this._log('Starting notifications...')
 
     return characteristic.startNotifications()
-        .then(() => {
+      .then(() => {
         this._log('Notifications started')
 
-          characteristic.addEventListener('characteristicvaluechanged',
+        characteristic.addEventListener('characteristicvaluechanged',
           this._boundHandleCharacteristicValueChanged)
-        })
+      })
   }
 
   /**
@@ -317,12 +317,12 @@ class BluetoothTerminal {
     this._log('Stopping notifications...')
 
     return characteristic.stopNotifications()
-        .then(() => {
+      .then(() => {
         this._log('Notifications stopped')
 
-          characteristic.removeEventListener('characteristicvaluechanged',
+        characteristic.removeEventListener('characteristicvaluechanged',
           this._boundHandleCharacteristicValueChanged)
-        })
+      })
   }
 
   /**
@@ -337,8 +337,8 @@ class BluetoothTerminal {
         '" bluetooth device disconnected, trying to reconnect...')
 
     this._connectDeviceAndCacheCharacteristic(device)
-        .then((characteristic) => this._startNotifications(characteristic))
-        .catch((error) => this._log(error))
+      .then((characteristic) => this._startNotifications(characteristic))
+      .catch((error) => this._log(error))
   }
 
   /**
