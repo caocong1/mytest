@@ -28,11 +28,13 @@
         background: #fff;
         height: 100%;
     }
+
     body.safari {
         height: calc(100vh - 75px);
     }
+
     body.safari section:first-child {
-        height: calc(45vh - 75px)!important;
+        height: calc(45vh - 75px) !important;
     }
 
     @font-face {
@@ -220,12 +222,12 @@
 
 
 <script type="text/javascript">
-    if(isSafari){
+    if (isSafari) {
+        alert(window.screen.availHeight + '--' + window.innerHeight + '--' + window.outerHeight + '--' + document.body.clientHeight)
         $('body').addClass('safari')
-        alert(window.screen.availHeight+'--'+ window.innerHeight+'--'+  window.outerHeight+'--'+ document.body.clientHeight )
     }
 
-    function isSafari(){
+    function isSafari() {
         return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent)
     }
     var data = "";
