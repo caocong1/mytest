@@ -170,51 +170,47 @@
             <div class="carousel-inner" id="banners"></div>
         </div>
     </section>
-    <section
-        style="height: 55vh;width: 100vw;background-size: contain;background: url(./img/bottom.svg) no-repeat bottom;">
-        <img src="./img/logo.svg" style="height: 7vh;margin: 3vh auto;display: block;" alt="logo">
-        <div style="margin: 1.5vh auto;color:#000;font-size: 4.5vw;letter-spacing:0.2em;text-align: center;">逗号立方购物公园欢迎您
+    <img src="./img/logo.svg" style="height: 7vh;margin: 3vh auto;display: block;" alt="logo">
+    <div style="margin: 1.5vh auto;color:#000;font-size: 4.5vw;letter-spacing:0.2em;text-align: center;">逗号立方购物公园欢迎您
+    </div>
+    <div style="width:75vw;margin: 1vw auto;font-size: 4.2vw;" id="main">
+        <div style="height: 10px;margin-top: 4px;margin-bottom: 10px;padding-left: 10px;color: red;font-size: 2.3vw;">
+            <label id="errMessage"></label>
         </div>
-        <div style="width:75vw;margin: 1vw auto;font-size: 4.2vw;" id="main">
-            <div
-                style="height: 10px;margin-top: 4px;margin-bottom: 10px;padding-left: 10px;color: red;font-size: 2.3vw;">
-                <label id="errMessage"></label>
+        <div id="inputbox">
+            <div class="inputbtngroup phone">
+                <input class="inputbtn" type="tel" name="phone" id="phoneinput" maxlength="11" oninput="authPhone()"
+                    style="width: 100%;padding-left: 14vw;padding-right: 31vw;">
+                <button type="button" id="getmsgbtn" name="getSMS" onclick="getSMS()">获取短信</button>
             </div>
-            <div id="inputbox">
-                <div class="inputbtngroup phone">
-                    <input class="inputbtn" type="tel" name="phone" id="phoneinput" maxlength="11" oninput="authPhone()"
-                        style="width: 100%;padding-left: 14vw;padding-right: 31vw;">
-                    <button type="button" id="getmsgbtn" name="getSMS" onclick="getSMS()">获取短信</button>
-                </div>
-                <div class="inputbtngroup lock">
-                    <input class="inputbtn" type="tel" name="authCode" id="codeinput" maxlength="6"
-                        style="width: 62%;padding-left: 14vw;">
-                    <button type="button" id="loginbtn" class="inputbtn" onclick="login(1)">登录</button>
-                </div>
+            <div class="inputbtngroup lock">
+                <input class="inputbtn" type="tel" name="authCode" id="codeinput" maxlength="6"
+                    style="width: 62%;padding-left: 14vw;">
+                <button type="button" id="loginbtn" class="inputbtn" onclick="login(1)">登录</button>
             </div>
+        </div>
 
-            <div id="inputresult" style="display: none">
-                <div
-                    style="margin: 3vw auto;color:#fff;font-size: 3.7vw;letter-spacing:0.2em;text-align: center;line-height: 1.5em">
-                    登录成功<br>正在跳转。。。
-                </div>
+        <div id="inputresult" style="display: none">
+            <div
+                style="margin: 3vw auto;color:#fff;font-size: 3.7vw;letter-spacing:0.2em;text-align: center;line-height: 1.5em">
+                登录成功<br>正在跳转。。。
             </div>
         </div>
-        <div style="display:none;justify-content: center;margin:5vw;font-size: 3vw;">
-            <div style="height: 10vw;margin:0 5vw;">
-                <img src="./img/wx.svg" id="wxbtn" onclick="login(2)" style="height: 8vw;" alt="wx">
-                <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">微信</div>
-            </div>
-            <div style="height: 10vw;margin:0 5vw;">
-                <img src="./img/mail.svg" id="mailbtn" style="height: 8vw;" alt="mail">
-                <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">短信</div>
-            </div>
+    </div>
+    <div style="display:none;justify-content: center;margin:5vw;font-size: 3vw;">
+        <div style="height: 10vw;margin:0 5vw;">
+            <img src="./img/wx.svg" id="wxbtn" onclick="login(2)" style="height: 8vw;" alt="wx">
+            <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">微信</div>
         </div>
-        <div
-            style="margin: 7vw auto;color:#666;font-size: 3vw;text-align: center;letter-spacing: 0.1em;margin-top: 12%;">
-            欢迎使用逗号立方无线网络
+        <div style="height: 10vw;margin:0 5vw;">
+            <img src="./img/mail.svg" id="mailbtn" style="height: 8vw;" alt="mail">
+            <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">短信</div>
         </div>
-    </section>
+    </div>
+    <div style="margin: 7vw auto;color:#666;font-size: 3vw;text-align: center;letter-spacing: 0.1em;margin-top: 12%;">
+        欢迎使用逗号立方无线网络
+    </div>
+    <img src="./img/bottom.svg" style="object-fit: cover;">
 </body>
 
 
@@ -222,14 +218,14 @@
 
 
 <script type="text/javascript">
-    if (isSafari) {
-        alert(window.screen.availHeight + '--' + window.innerHeight + '--' + window.outerHeight + '--' + document.body.clientHeight)
-        $('body').addClass('safari')
-    }
+    // if (isSafari) {
+    //     alert(window.screen.availHeight + '--' + window.innerHeight + '--' + window.outerHeight + '--' + document.body.clientHeight)
+    //     $('body').addClass('safari')
+    // }
 
-    function isSafari() {
-        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent)
-    }
+    // function isSafari() {
+    //     return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent)
+    // }
     var data = "";
     var second = 60;
     var paraString;
