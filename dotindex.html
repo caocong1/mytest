@@ -215,7 +215,8 @@
 
 
 <script type="text/javascript">
-    window.outerHeight = window.screen.availHeight
+    const height = window.screen.availHeight
+    document.body.style.height = height + 'px'
     var data = "";
     var second = 60;
     var paraString;
