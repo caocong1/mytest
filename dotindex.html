@@ -226,7 +226,7 @@
     }
 
     function isSafari(){
-        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && !/Mobile/.test(navigator.userAgent)
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent)
     }
     var data = "";
     var second = 60;
