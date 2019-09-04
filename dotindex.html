@@ -222,10 +222,11 @@
 <script type="text/javascript">
     if(isSafari){
         $('body').addClass('safari')
+        alert(window.screen.availHeight, window.innerHeight, window.outerHeight )
     }
 
     function isSafari(){
-        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && !/Mobile/.test(navigator.userAgent)
     }
     var data = "";
     var second = 60;
