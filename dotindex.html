@@ -1,14 +1,15 @@
 <!DOCTYPE>
 <html lang="en">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
-    <title>PortalWeb</title>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/muyi.css"/>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>PortalWeb</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/muyi.css" />
 
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -19,13 +20,15 @@
 </head>
 
 <style>
-    html,body {
-        font-family: Reeji-CloudYuanZhun-GBK,Tahoma,Helvetica,Arial,Verdana,"Microsoft YaHei","SimSun","宋体",serif;
+    html,
+    body {
+        font-family: Reeji-CloudYuanZhun-GBK, Tahoma, Helvetica, Arial, Verdana, "Microsoft YaHei", "SimSun", "宋体", serif;
         -webkit-overflow-scrolling: touch;
         user-select: none;
         background: #fff;
         height: 100%;
     }
+
     @font-face {
         font-family: Reeji-CloudYuanZhun-GBK;
         src: url('fonts/dotminifont.ttf');
@@ -147,55 +150,63 @@
         background: #E0E0E0;
         border-radius: 50%;
     }
+
     /*.banner {*/
     /*    position: absolute;*/
     /*}*/
 </style>
-<body style="overflow: hidden;">
-<section style="min-height: 45vh;overflow: hidden;">
-    <div class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" id="banners"></div>
-    </div>
-</section>
-<section style="min-height: 55vh;width: 100vw;background-size: contain;background: url(./img/bottom.svg) no-repeat bottom;">
-    <img src="./img/logo.svg" style="height: 7vh;margin: 3vh auto;display: block;" alt="logo">
-    <div style="margin: 1.5vh auto;color:#000;font-size: 4.5vw;letter-spacing:0.2em;text-align: center;">逗号立方购物公园欢迎您</div>
-    <div style="width:75vw;margin: 1vw auto;font-size: 4.2vw;" id="main">
-        <div style="height: 10px;margin-top: 4px;margin-bottom: 10px;padding-left: 10px;color: red;font-size: 2.3vw;">
-            <label id="errMessage" ></label>
-        </div>
-        <div id="inputbox">
-            <div class="inputbtngroup phone">
-                <input class="inputbtn" type="tel" name="phone"  id="phoneinput" maxlength="11" oninput="authPhone()"
-                       style="width: 100%;padding-left: 14vw;padding-right: 31vw;">
-                <button type="button" id="getmsgbtn" name="getSMS" onclick="getSMS()">获取短信</button>
-            </div>
-            <div class="inputbtngroup lock">
-                <input class="inputbtn" type="tel" name="authCode" id="codeinput" maxlength="6" style="width: 62%;padding-left: 14vw;">
-                <button type="button" id="loginbtn" class="inputbtn"  onclick="login(1)">登录</button>
-            </div>
-        </div>
 
-        <div id="inputresult" style="display: none">
-            <div style="margin: 3vw auto;color:#fff;font-size: 3.7vw;letter-spacing:0.2em;text-align: center;line-height: 1.5em">
-                登录成功<br>正在跳转。。。
+<body style="overflow: hidden;">
+    <section style="min-height: 45vh;overflow: hidden;">
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" id="banners"></div>
+        </div>
+    </section>
+    <section
+        style="min-height: 55vh;width: 100vw;background-size: contain;background: url(./img/bottom.svg) no-repeat bottom;">
+        <img src="./img/logo.svg" style="height: 7vh;margin: 3vh auto;display: block;" alt="logo">
+        <div style="margin: 1.5vh auto;color:#000;font-size: 4.5vw;letter-spacing:0.2em;text-align: center;">逗号立方购物公园欢迎您
+        </div>
+        <div style="width:75vw;margin: 1vw auto;font-size: 4.2vw;" id="main">
+            <div
+                style="height: 10px;margin-top: 4px;margin-bottom: 10px;padding-left: 10px;color: red;font-size: 2.3vw;">
+                <label id="errMessage"></label>
+            </div>
+            <div id="inputbox">
+                <div class="inputbtngroup phone">
+                    <input class="inputbtn" type="tel" name="phone" id="phoneinput" maxlength="11" oninput="authPhone()"
+                        style="width: 100%;padding-left: 14vw;padding-right: 31vw;">
+                    <button type="button" id="getmsgbtn" name="getSMS" onclick="getSMS()">获取短信</button>
+                </div>
+                <div class="inputbtngroup lock">
+                    <input class="inputbtn" type="tel" name="authCode" id="codeinput" maxlength="6"
+                        style="width: 62%;padding-left: 14vw;">
+                    <button type="button" id="loginbtn" class="inputbtn" onclick="login(1)">登录</button>
+                </div>
+            </div>
+
+            <div id="inputresult" style="display: none">
+                <div
+                    style="margin: 3vw auto;color:#fff;font-size: 3.7vw;letter-spacing:0.2em;text-align: center;line-height: 1.5em">
+                    登录成功<br>正在跳转。。。
+                </div>
             </div>
         </div>
-    </div>
-    <div style="display:none;justify-content: center;margin:5vw;font-size: 3vw;">
-        <div style="height: 10vw;margin:0 5vw;">
-            <img src="./img/wx.svg" id="wxbtn" onclick="login(2)" style="height: 8vw;" alt="wx">
-            <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">微信</div>
+        <div style="display:none;justify-content: center;margin:5vw;font-size: 3vw;">
+            <div style="height: 10vw;margin:0 5vw;">
+                <img src="./img/wx.svg" id="wxbtn" onclick="login(2)" style="height: 8vw;" alt="wx">
+                <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">微信</div>
+            </div>
+            <div style="height: 10vw;margin:0 5vw;">
+                <img src="./img/mail.svg" id="mailbtn" style="height: 8vw;" alt="mail">
+                <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">短信</div>
+            </div>
         </div>
-        <div style="height: 10vw;margin:0 5vw;">
-            <img src="./img/mail.svg" id="mailbtn" style="height: 8vw;" alt="mail">
-            <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">短信</div>
+        <div
+            style="margin: 7vw auto;color:#666;font-size: 3vw;text-align: center;letter-spacing: 0.1em;margin-top: 12%;">
+            欢迎使用逗号立方无线网络
         </div>
-    </div>
-    <div style="margin: 7vw auto;color:#666;font-size: 3vw;text-align: center;letter-spacing: 0.1em;margin-top: 12%;">
-        欢迎使用逗号立方无线网络
-    </div>
-</section>
+    </section>
 </body>
 
 
@@ -203,6 +214,7 @@
 
 
 <script type="text/javascript">
+    window.outerHeight = window.screen.availHeight
     var data = "";
     var second = 60;
     var paraString;
@@ -290,12 +302,12 @@
             // async: false,
             success: function (res) {
                 data = res;
-            
-                
+
+
                 second = data['phone']['sms_interval'];
-				
-				console.log(second)
-              
+
+                console.log(second)
+
                 if (sessionStorage.time > 0) {
                     second = sessionStorage.time;
                     data['phone']['smstext'] = second + '秒';
@@ -310,12 +322,12 @@
                 }
 
                 const banners = res.carousel.img
-                if(banners){
+                if (banners) {
                     $('#banners')
-                            .html(banners.map((val, i) => `<div class="carousel-item${i?'':' active'}"><img src="./${val.url}" class="d-block w-100" alt="banner"></div>`).join(''))
-                            .find('img').on('error', e => {
-                                e.target.src = './img/banner.png'
-                            })
+                        .html(banners.map((val, i) => `<div class="carousel-item${i ? '' : ' active'}"><img src="attachment/${val.url}" class="d-block w-100" alt="banner"></div>`).join(''))
+                        .find('img').on('error', e => {
+                            e.target.src = './img/banner.png'
+                        })
                 }
             }
         });
