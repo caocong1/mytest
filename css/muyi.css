@@ -1,0 +1,118 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+/*body {*/
+  /*background-color: #E4E6E9;*/
+  /*min-height: 100%;*/
+  /*padding-bottom: 0;*/
+  /*font-family: 'Open Sans';*/
+  /*font-size: 13px;*/
+  /*color: #393939;*/
+  /*line-height: 1.5;*/
+/*}*/
+/*.main-container:before {*/
+  /*display: block;*/
+  /*content: "";*/
+  /*position: absolute;*/
+  /*z-index: -2;*/
+  /*width: 100%;*/
+  /*max-width: inherit;*/
+  /*bottom: 0;*/
+  /*top: 0;*/
+  /*background-color: #FFF;*/
+/*}*/
+
+.main-content {
+  margin-left: 0;
+  /*min-height: 100%;*/
+  padding: 0;
+}
+.main-content:before,
+.main-content:after {
+  content: " ";
+  display: table;
+}
+.main-content:after {
+  clear: both;
+}
+
+.main-content-inner {
+  float: left;
+  width: 100%;
+}
+
+.sidebar + .main-content {
+  margin-left: 190px;
+}
+.page-content {
+  background-color: #FFF;
+  position: relative;
+  margin: 0;
+  padding: 8px 6px 24px;
+}
+.page-header {
+  margin: 0 0 12px;
+  border-bottom: 1px dotted #E2E2E2;
+  padding-bottom: 16px;
+  padding-top: 7px;
+}
+.page-header h1 {
+  padding: 0;
+  margin: 0 8px;
+  font-size: 24px;
+  font-weight: lighter;
+  color: #2679B5;
+}
+.page-header h1 small {
+  margin: 0 6px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #8089A0;
+}
+
+/*底边样式*/
+.footer {
+  padding-top: 75px;
+  height: 0;
+  width: 0;
+}
+.footer .footer-inner {
+  text-align: center;
+  position: absolute;
+  z-index: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.footer .footer-inner .footer-content {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  padding: 8px;
+  line-height: 36px;
+  border-top: 3px double #E5E5E5;
+}
+.footer.footer-fixed .footer-inner {
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+}
+.footer.footer-fixed .footer-inner .footer-content {
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px solid #DDD;
+  background-color: #F2F2F2;
+}
+.footer.footer-fixed + .btn-scroll-up {
+  z-index: 999;
+}
+
+.space {
+  max-height: 1px;
+  min-height: 1px;
+  overflow: hidden;
+  margin: 6px 0;
+}

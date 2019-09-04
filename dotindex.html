@@ -1,0 +1,443 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>PortalWeb</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/muyi.css"/>
+
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/md5.min.js"></script>
+    <script type="text/javascript" src="js/wechatutil.js"></script>
+</head>
+
+<style>
+    html,body {
+        font-family: Reeji-CloudYuanZhun-GBK,Tahoma,Helvetica,Arial,Verdana,"Microsoft YaHei","SimSun","宋体",serif;
+        -webkit-overflow-scrolling: touch;
+        user-select: none;
+        background: #fff;
+        height: 100%;
+    }
+    @font-face {
+        font-family: Reeji-CloudYuanZhun-GBK;
+        src: url('fonts/dotminifont.ttf');
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    input {
+        -webkit-appearance: none !important;
+        outline: none;
+        border: none;
+        background: #fff;
+        padding: 0;
+    }
+
+    button {
+        -webkit-appearance: none !important;
+        background: #fff;
+        border: 0;
+        font-size: 3.5vw;
+    }
+
+    .inputbtn {
+        height: 6vh;
+        border-radius: 6vh;
+        border: 2px solid #7AC28A;
+    }
+
+    .inputbtngroup {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 3vw 0;
+    }
+
+    .inputbtngroup .inputbtn {
+        display: inline-block;
+    }
+
+    .phone:before {
+        content: '';
+        background-size: auto;
+        position: absolute;
+        left: 6vw;
+        width: 4vw;
+        height: 3vh;
+        background: url(img/phone.svg) no-repeat center;
+    }
+
+    .lock:before {
+        content: '';
+        background-size: auto;
+        position: absolute;
+        left: 6vw;
+        width: 4vw;
+        height: 3vh;
+        background: url(img/lock.svg) no-repeat center;
+    }
+
+    #getmsgbtn {
+        position: absolute;
+        right: 0;
+        height: calc(6vh - 4px);
+        top: 0;
+        border-radius: 6vh;
+        margin: 2px;
+        padding: 0 5vw;
+        width: calc(32vw - 4px);
+        text-align: center;
+        letter-spacing: 0.2em;
+        text-indent: 0.2em;
+        line-height: 6vh;
+        color: #666;
+    }
+
+    #getmsgbtn:active {
+        background: #E0E0E0;
+    }
+
+    #getmsgbtn:disabled:active {
+        background: #fff;
+    }
+
+    #getmsgbtn:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 3vh;
+        width: 1px;
+        background: #666;
+        top: 0.9vh;
+    }
+
+    #loginbtn {
+        width: 35%;
+        background: #7AC28A;
+        text-align: center;
+        letter-spacing: 0.5em;
+        text-indent: 0.5em;
+        line-height: 6vh;
+        color: #fff;
+    }
+
+    #loginbtn:active {
+        background: #52a59f !important;
+    }
+
+    #loginbtn:disabled:active {
+        background: #7AC28A !important;
+    }
+
+    #wxbtn:active,
+    #mailbtn:active {
+        background: #E0E0E0;
+        border-radius: 50%;
+    }
+    /*.banner {*/
+    /*    position: absolute;*/
+    /*}*/
+</style>
+<body style="overflow-x: hidden;">
+<section style="min-height: 45%;overflow: hidden;">
+    <div class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" id="banners"></div>
+    </div>
+</section>
+<section style="min-height: 55%;width: 100vw;background-size: contain;background: url(./img/bottom.svg) no-repeat bottom;">
+    <img src="./img/logo.svg" style="height: 7vh;margin: 3vh auto;display: block;" alt="logo">
+    <div style="margin: 1.5vh auto;color:#000;font-size: 4.5vw;letter-spacing:0.2em;text-align: center;">逗号立方购物公园欢迎您</div>
+    <div style="width:75vw;margin: 1vw auto;font-size: 4.2vw;" id="main">
+        <div style="height: 10px;margin-top: 4px;margin-bottom: 10px;padding-left: 10px;color: red;font-size: 2.3vw;">
+            <label id="errMessage" ></label>
+        </div>
+        <div id="inputbox">
+            <div class="inputbtngroup phone">
+                <input class="inputbtn" type="tel" name="phone"  id="phoneinput" maxlength="11" oninput="authPhone()"
+                       style="width: 100%;padding-left: 14vw;padding-right: 31vw;">
+                <button type="button" id="getmsgbtn" name="getSMS" onclick="getSMS()">获取短信</button>
+            </div>
+            <div class="inputbtngroup lock">
+                <input class="inputbtn" type="tel" name="authCode" id="codeinput" maxlength="6" style="width: 62%;padding-left: 14vw;">
+                <button type="button" id="loginbtn" class="inputbtn"  onclick="login(1)">登录</button>
+            </div>
+        </div>
+
+        <div id="inputresult" style="display: none">
+            <div style="margin: 3vw auto;color:#fff;font-size: 3.7vw;letter-spacing:0.2em;text-align: center;line-height: 1.5em">
+                登录成功<br>正在跳转。。。
+            </div>
+        </div>
+    </div>
+    <div style="display:none;justify-content: center;margin:5vw;font-size: 3vw;">
+        <div style="height: 10vw;margin:0 5vw;">
+            <img src="./img/wx.svg" id="wxbtn" onclick="login(2)" style="height: 8vw;" alt="wx">
+            <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">微信</div>
+        </div>
+        <div style="height: 10vw;margin:0 5vw;">
+            <img src="./img/mail.svg" id="mailbtn" style="height: 8vw;" alt="mail">
+            <div style="text-align: center;color:#666;margin: 0.3em 0;letter-spacing: 0.1em;">短信</div>
+        </div>
+    </div>
+    <div style="margin: 7vw auto;color:#666;font-size: 3vw;text-align: center;letter-spacing: 0.1em;margin-top: 25vw">
+        欢迎使用逗号立方无线网络
+    </div>
+</section>
+</body>
+
+
+</html>
+
+
+<script type="text/javascript">
+    window.outerHeight = window.screen.availHeight
+    var data = "";
+    var second = 60;
+    var paraString;
+    var phone;
+    var paraDict = new Object();
+
+    var macTrigger = '<div style="width: 65%;margin:1.5em auto;line-height: 1.6em;font-size:14px;text-align: center;margin-top: 30px;">' +
+        '    <i class="fa fa-check fa-4x" style="color: green;display: inline-block;vertical-align: middle;"></i>' +
+        '   <p style="color: green;font-size: 26px;margin-top: 20px;" name="macTriggerText">您已认证成功！</p>' +
+        '   <p style="color: black;font-size: 18px;margin-top: 20px;" name="skip">正在跳转...</p>' +
+        '</div>';
+
+
+    function authPhone() {
+        var myreg = /^1[3|4|5|7|8][0-9]{9}$/;
+        phone = $('[name="phone"]').val();
+        console.log(phone)
+        $('[name="getSMS"]').prop('disabled', !myreg.test(phone));
+
+    }
+
+    function getSMS() {
+        if (null == paraDict["userip"] || null == paraDict["usermac"]) {
+            alert("认证参数有问题，请稍后再试！")
+            return null;
+        }
+
+        phone = undefined ? sessionStorage.phone : phone;
+        paraDict['phone'] = phone;
+        $.ajax({
+            url: "auth/getsms.do", //请求后台的URL（*）
+            contentType: "application/json;charset=utf-8",
+            type: "POST",
+            // crossDomain: true,
+            // timeout: 3000,
+            data: JSON.stringify(paraDict),
+            dataType: "json",
+            success: function (res) {
+                $("#errMessage").html(res['message']);
+                $("#errMessage").show();
+                if ('200' == res['code']) {
+                    if (data['messagestat'] == '3') {
+                        $("#errMessage").html(res['message'] + ",验证码：" + res['codeSMS']);
+                        $("#errMessage").show();
+                    }
+                    gettime();
+                }
+            },
+            error: function () {
+                $("#errMessage").html("网络异常，请稍后重试！");
+                $("#errMessage").show();
+
+            }
+        });
+        $('[name="getSMS"]').prop('disabled', true);
+        $('[name="getSMS"]').blur();
+        sessionStorage.phone = $('[name="phone"]').val();
+    }
+
+    function gettime() {
+        var resend = setInterval(function () {
+            if (second > 0) {
+                second--;
+                $('[name="getSMS"]').html(second + "秒");
+
+                sessionStorage.time = second;
+            } else {
+                clearInterval(resend);
+                $('[name="getSMS"]').html("重新发送");
+                $('[name="getSMS"]').prop('disabled', false);
+                second = data.phone.sms_interval;
+            }
+        }, 1000);
+    }
+
+    $(function () {
+
+        $.ajax({
+            url: "auth/getconfigjson.do", //请求后台的URL（*）
+            contentType: "application/json;charset=utf-8",
+            type: "POST",
+            // crossDomain: true,
+            // timeout: 3000,
+            dataType: "json",
+            // async: false,
+            success: function (res) {
+                data = res;
+            
+                
+                second = data['phone']['sms_interval'];
+				
+				console.log(second)
+              
+                if (sessionStorage.time > 0) {
+                    second = sessionStorage.time;
+                    data['phone']['smstext'] = second + '秒';
+                    gettime();
+                }
+
+
+
+                if (null != sessionStorage.phone) {
+                    $('[name="phone"]').val(sessionStorage.phone.length > 8 ? sessionStorage.phone : data.phone.smstext);
+                    phone = $('[name="phone"]').val();
+                }
+
+                const banners = res.carousel.img
+                if(banners){
+                    $('#banners')
+                            .html(banners.map((val, i) => `<div class="carousel-item${i?'':' active'}"><img src="./${val.url}" class="d-block w-100" alt="banner"></div>`).join(''))
+                            .find('img').on('error', e => {
+                                e.target.src = './img/banner.png'
+                            })
+                }
+            }
+        });
+
+
+        paraString = location.search.substr(1);
+        var paraList = paraString.length ? paraString.split("&") : [];
+
+        $.each(paraList, function (index, val) {
+
+            var item = paraList[index].split("=");
+            paraDict[item[0]] = item[1];
+        })
+
+
+        if (null == paraDict["userip"] || null == paraDict["usermac"] || null == paraDict['nasip']) {
+            $("#errMessage").html("认证参数有问题，请稍后再试！");
+            $("#errMessage").show();
+
+        } else {
+            paraDict['usermac'] = paraDict['usermac'].toUpperCase();
+            // paraDict['nasip'] = '10.10.100.34';
+        }
+        paraDict['groupid'] = 3;
+        $.ajax({
+            url: "auth/mactrigger.do", //请求后台的URL（*）
+            contentType: "application/json;charset=utf-8",
+            type: "POST",
+            // crossDomain: true,
+            // timeout: 3000,
+            data: JSON.stringify(paraDict),
+            dataType: "json",
+            success: function (res) {
+                // alert(res['code'])
+                if (res['code'] == 200) {
+                    $("#main").html(macTrigger);
+                    //sleep 3秒钟再跳转
+                    setTimeout(function () {
+                        window.location.replace(data.url);
+                    }, 3000);
+                } else if (res['code'] == 209) {
+                    $("#main").html('<p style="color: green;font-size: 26px;margin-top: 20px;text-align: center">' + res['message'] + '</p>');
+                }
+            }
+        });
+
+    })
+
+
+    function login(type) {
+
+        paraDict['type'] = type;
+        switch (type) {
+            case 1:
+                //短信认证
+                var userCode = $('[name="authCode"]').val();
+                console.log(userCode)
+                if (null == userCode || userCode == undefined) {
+                    $("#errMessage").html("请输入短信密码！");
+                    $("#errMessage").show();
+                    return null;
+                } else {
+                    paraDict['phone'] = $('[name="phone"]').val();
+                    paraDict['authcode'] = userCode;
+
+                }
+                break;
+            case 2:
+                window.location = "dotindex_wx.html?ssid=" + "DHLF" + "&usermac=" + paraDict['usermac'].replace(/-/g, ":").toLowerCase() + "&extend=" + paraDict['nasip'] + "," + paraDict['usermac'] + "," + paraDict['userip'];
+
+                //微信认证
+                break;
+
+
+        }
+        if (null == paraDict["userip"] || null == paraDict["usermac"] || null == paraDict['nasip']) {
+
+            $("#errMessage").html("认证参数有问题，请稍后再试！");
+            $("#errMessage").show();
+            return null;
+        }
+        $.ajax({
+            url: "auth/login.do", //请求后台的URL（*）
+            contentType: "application/json;charset=utf-8",
+            type: "POST",
+            // crossDomain: true,
+            // timeout: 3000,
+            data: JSON.stringify(paraDict),
+            dataType: "json",
+            success: function (res) {
+
+                if (res['code'] == 200) {
+                    if (type == 2) {
+                        $("#wximg").hide();
+                        $("#skipimg").show();
+                        //document.all("nouse").src = "http://www.baiud.com";
+                        window.location = "dycwx2.html?ssid=" + data.wx.general.ssid + "&usermac=" + paraDict['usermac'].replace(/-/g, ":").toLowerCase() + "&extend=" + paraDict['nasip'] + "," + paraDict['usermac'] + "," + paraDict['userip'];
+
+                    } else {
+                        $("#errMessage").html(res['message']);
+                        $("#errMessage").show();
+                        // window.location.replace(data.url);
+                        $("#main").html(macTrigger);
+                        setTimeout(function () {
+                            window.location.replace(data.url);
+                        }, 3000);
+                    }
+
+                } else {
+                    $("#errMessage").html(res['message']);
+                    $("#errMessage").show();
+
+
+                }
+            }
+        });
+
+
+
+    }
+
+
+
+</script>
