@@ -7,7 +7,6 @@
     <title>PortalWeb</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/muyi.css" />
@@ -28,6 +27,9 @@
         user-select: none;
         background: #fff;
         height: 100%;
+    }
+    body.safari {
+        height: calc(100vh - 75px);
     }
 
     @font-face {
@@ -215,8 +217,13 @@
 
 
 <script type="text/javascript">
-    const height = window.screen.availHeight
-    document.body.style.height = height + 'px'
+    if(isSafari){
+        $('body').addClass('safari')
+    }
+
+    function isSafari(){
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+    }
     var data = "";
     var second = 60;
     var paraString;
